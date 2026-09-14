@@ -1,0 +1,19 @@
+name: mtb-pipeline
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python=3.10
+  - pandas
+  - openpyxl
+  - fastqc
+  - trimmomatic
+  - bwa
+  - samtools
+  - gatk4
+  - vcftools
+  - tb-profiler=6.7.0
+  - wget
+  - gzip
