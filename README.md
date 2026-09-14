@@ -8,12 +8,6 @@ The broader goal is to compare **conventional whole-genome sequencing (WGS) of c
 
 The current pipeline focuses on the conventional isolate WGS workflow and establishes the genomic and drug-resistance profiles that will serve as the reference for comparison with SPIT-SEQ data.
 
----
-
-## Project Question
-
-**Can direct-from-sputum SPIT-SEQ identify drug-resistance-associated mutations comparable to those detected through conventional WGS of cultured MTB isolates?**
-
 The comparison will evaluate:
 
 * Shared resistance-associated mutations
@@ -57,7 +51,7 @@ Variant Calling     Deduplicated BAM
     ▼                      ▼
 Variant QC          Variant Calling
                            │
-                           ▼
+    |                      ▼
                        Variant QC
     │                      │
     └──────────┬───────────┘
