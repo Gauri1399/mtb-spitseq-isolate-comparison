@@ -1,3 +1,7 @@
+Yes — this is valid GitHub Markdown. The issue before was the formatting wrapper, not your README content.
+
+You can copy this **entire block directly into `README.md`**:
+
 ````markdown
 # MTB SPIT-SEQ vs. Conventional Isolate WGS
 
@@ -69,7 +73,7 @@ Variant QC       Variant QC
               │
               ▼
      Drug-Resistance Profile
-````
+```
 
 ---
 
@@ -105,8 +109,8 @@ PCR duplicates are identified using **GATK MarkDuplicates**.
 
 Two analysis branches are maintained:
 
-* **Marked branch:** duplicates remain in the BAM but are flagged.
-* **Deduplicated branch:** duplicate reads are removed before variant calling.
+- **Marked branch:** duplicates remain in the BAM but are flagged.
+- **Deduplicated branch:** duplicate reads are removed before variant calling.
 
 Maintaining both branches allows downstream variant results and QC metrics to be compared.
 
@@ -118,16 +122,16 @@ Variants are subsequently filtered based on quality and sequencing depth.
 
 Current filtering criteria include:
 
-* `QUAL >= 20`
-* `DP >= 10`
+- `QUAL >= 20`
+- `DP >= 10`
 
 ### 7. Variant QC
 
 Variant-level and sample-level QC metrics are collected, including:
 
-* Number of variants/SNPs
-* Allele frequency
-* Sequencing depth
+- Number of variants/SNPs
+- Allele frequency
+- Sequencing depth
 
 These metrics are used to assess the quality and consistency of variant calls across isolates.
 
@@ -147,12 +151,12 @@ R scripts in `Plots/` are used to summarize genomic variation and resistance-ass
 
 Current figures include:
 
-| Script                       | Description                         |
-| ---------------------------- | ----------------------------------- |
-| `Fig1_SNPs_per_Isolate.R`    | SNP counts across isolates          |
-| `Fig2_Mutation_Categories.R` | Mutation categories                 |
-| `Fig3_Drug_Resistance.R`     | Resistance-associated mutations     |
-| `Fig4_Resistance_Profile.R`  | Resistance profiles across isolates |
+| Script | Description |
+|---|---|
+| `Fig1_SNPs_per_Isolate.R` | SNP counts across isolates |
+| `Fig2_Mutation_Categories.R` | Mutation categories |
+| `Fig3_Drug_Resistance.R` | Resistance-associated mutations |
+| `Fig4_Resistance_Profile.R` | Resistance profiles across isolates |
 
 ---
 
@@ -201,18 +205,18 @@ mtb-spitseq-isolate-comparison/
 
 The pipeline uses:
 
-| Tool            | Purpose                               |
-| --------------- | ------------------------------------- |
-| **Nextflow**    | Workflow orchestration                |
-| **FastQC**      | Sequencing read QC                    |
-| **Trimmomatic** | Adapter and quality trimming          |
-| **BWA-MEM**     | Read alignment                        |
-| **Samtools**    | BAM processing and QC                 |
-| **GATK**        | Duplicate marking and variant calling |
-| **BCFtools**    | Variant processing                    |
-| **SnpEff**      | Variant annotation                    |
-| **TB-Profiler** | MTB drug-resistance profiling         |
-| **R**           | Visualization and downstream analysis |
+| Tool | Purpose |
+|---|---|
+| **Nextflow** | Workflow orchestration |
+| **FastQC** | Sequencing read QC |
+| **Trimmomatic** | Adapter and quality trimming |
+| **BWA-MEM** | Read alignment |
+| **Samtools** | BAM processing and QC |
+| **GATK** | Duplicate marking and variant calling |
+| **BCFtools** | Variant processing |
+| **SnpEff** | Variant annotation |
+| **TB-Profiler** | MTB drug-resistance profiling |
+| **R** | Visualization and downstream analysis |
 
 The computational environment is documented in `environment.yml`.
 
@@ -224,9 +228,9 @@ The computational environment is documented in `environment.yml`.
 
 Install:
 
-* Nextflow
-* Java
-* Conda or Mamba
+- Nextflow
+- Java
+- Conda or Mamba
 
 ### Clone the repository
 
@@ -281,14 +285,14 @@ Input file locations are configured through the project configuration files.
 
 The pipeline generates intermediate and final outputs for:
 
-* Read quality control
-* Trimmed reads
-* Aligned BAM files
-* Duplicate-marked and deduplicated BAM files
-* Variant calls
-* Variant QC metrics
-* TB-Profiler resistance profiles
-* Combined analysis tables
+- Read quality control
+- Trimmed reads
+- Aligned BAM files
+- Duplicate-marked and deduplicated BAM files
+- Variant calls
+- Variant QC metrics
+- TB-Profiler resistance profiles
+- Combined analysis tables
 
 Generated sequencing files should be kept outside version control when they contain large or sensitive research datasets.
 
@@ -306,8 +310,8 @@ For resistance analysis, variants are interpreted using TB-Profiler and its cura
 
 The pipeline also considers allele frequency when evaluating variants.
 
-* **Fixed variants:** the alternate allele is supported by approximately all reads at the position.
-* **Mixed variants:** both reference and alternate alleles are detected at appreciable frequencies, which may indicate a mixed bacterial population or heteroresistance.
+- **Fixed variants:** the alternate allele is supported by approximately all reads at the position.
+- **Mixed variants:** both reference and alternate alleles are detected at appreciable frequencies, which may indicate a mixed bacterial population or heteroresistance.
 
 Mixed variants are particularly relevant when comparing SPIT-SEQ with conventional isolate WGS because differences in variant detection may affect resistance-profile concordance.
 
@@ -337,11 +341,11 @@ Conventional Isolate WGS
 
 The analysis will classify variants as:
 
-* Shared between methods
-* Detected only by isolate WGS
-* Detected only by SPIT-SEQ
-* Fixed or mixed
-* Resistance-associated or non-resistance-associated
+- Shared between methods
+- Detected only by isolate WGS
+- Detected only by SPIT-SEQ
+- Fixed or mixed
+- Resistance-associated or non-resistance-associated
 
 The overall objective is to determine whether **culture-free SPIT-SEQ can reliably capture resistance-associated mutations identified by conventional WGS of cultured MTB isolates.**
 
@@ -353,11 +357,11 @@ The workflow is implemented in **Nextflow DSL2** to provide a modular and reprod
 
 The repository separates:
 
-* Workflow orchestration
-* Individual analysis modules
-* Configuration
-* Computational environments
-* Visualization scripts
+- Workflow orchestration
+- Individual analysis modules
+- Configuration
+- Computational environments
+- Visualization scripts
 
 This structure allows the pipeline to be run across local and HPC environments with environment-specific configuration files.
 
@@ -377,25 +381,25 @@ Only pipeline code, configuration, documentation, and appropriate non-sensitive 
 
 ### Completed
 
-* [x] Raw read QC
-* [x] Adapter/quality trimming
-* [x] H37Rv alignment
-* [x] Read group assignment
-* [x] Duplicate marking/removal
-* [x] Variant calling
-* [x] Variant QC
-* [x] TB-Profiler resistance profiling
-* [x] SNP visualization
-* [x] Resistance-associated mutation visualization
+- [x] Raw read QC
+- [x] Adapter/quality trimming
+- [x] H37Rv alignment
+- [x] Read group assignment
+- [x] Duplicate marking/removal
+- [x] Variant calling
+- [x] Variant QC
+- [x] TB-Profiler resistance profiling
+- [x] SNP visualization
+- [x] Resistance-associated mutation visualization
 
 ### Next Steps
 
-* [ ] Process SPIT-SEQ samples
-* [ ] Compare SPIT-SEQ and isolate WGS variants
-* [ ] Evaluate fixed and mixed variants
-* [ ] Compare resistance-associated mutations
-* [ ] Identify shared, missed, and unique variants
-* [ ] Quantify concordance between sequencing approaches
+- [ ] Process SPIT-SEQ samples
+- [ ] Compare SPIT-SEQ and isolate WGS variants
+- [ ] Evaluate fixed and mixed variants
+- [ ] Compare resistance-associated mutations
+- [ ] Identify shared, missed, and unique variants
+- [ ] Quantify concordance between sequencing approaches
 
 ---
 
@@ -406,5 +410,4 @@ Only pipeline code, configuration, documentation, and appropriate non-sensitive 
 MS Bioinformatics, Johns Hopkins University
 
 [GitHub](https://github.com/Gauri1399)
-
-```
+````
