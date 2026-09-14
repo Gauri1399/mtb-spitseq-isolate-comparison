@@ -1,7 +1,3 @@
-Yes — this is valid GitHub Markdown. The issue before was the formatting wrapper, not your README content.
-
-You can copy this **entire block directly into `README.md`**:
-
 ````markdown
 # MTB SPIT-SEQ vs. Conventional Isolate WGS
 
