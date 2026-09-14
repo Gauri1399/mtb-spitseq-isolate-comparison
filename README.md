@@ -50,9 +50,9 @@ Variant Calling     Deduplicated BAM
     │                      │
     ▼                      ▼
 Variant QC          Variant Calling
-                           │
+    |                      │
     |                      ▼
-                       Variant QC
+    |                   Variant QC
     │                      │
     └──────────┬───────────┘
                ▼
@@ -72,35 +72,20 @@ Variant QC          Variant Calling
 
 ## Pipeline Steps
 
-### 1. Raw Read Quality Control
-
-**FastQC** is used to assess the quality of raw sequencing reads before downstream processing.
-
-This step helps identify sequencing quality issues before trimming and alignment.
+### 1. Raw Read Quality Control 
+**FastQC** is used to assess the quality of raw sequencing reads before downstream processing. This step helps identify sequencing quality issues before trimming and alignment.
 
 ### 2. Adapter and Quality Trimming
-
-**Trimmomatic** removes sequencing adapters and low-quality bases from the raw reads.
-
-A second **FastQC** analysis is performed after trimming to confirm improvement or retention of read quality.
+**Trimmomatic** removes sequencing adapters and low-quality bases from the raw reads. A second **FastQC** analysis is performed after trimming to confirm improvement or retention of read quality.
 
 ### 3. Reference Genome
-
-Reads are aligned against the ***M. tuberculosis* H37Rv reference genome**.
-
-The pipeline includes a module for downloading and indexing the reference genome when required.
+Reads are aligned against the ***M. tuberculosis* H37Rv reference genome**. The pipeline includes a module for downloading and indexing the reference genome when required.
 
 ### 4. Read Alignment
-
-Trimmed paired-end reads are aligned to H37Rv using **BWA-MEM**.
-
-The resulting alignments are sorted and indexed to produce BAM files for downstream analysis.
+Trimmed paired-end reads are aligned to H37Rv using **BWA-MEM**. The resulting alignments are sorted and indexed to produce BAM files for downstream analysis.
 
 ### 5. PCR Duplicate Processing
-
-**GATK MarkDuplicates** identifies PCR duplicate reads.
-
-The workflow maintains two branches:
+**GATK MarkDuplicates** identifies PCR duplicate reads. The workflow maintains two branches:
 
 | Branch           | Description                                        |
 | ---------------- | -------------------------------------------------- |
@@ -110,11 +95,7 @@ The workflow maintains two branches:
 This allows variant calls and QC metrics from the two approaches to be compared.
 
 ### 6. Variant Calling
-
-Variants are identified using **GATK HaplotypeCaller** with a haploid configuration appropriate for MTB.
-
-Variants are filtered based on sequencing quality and depth.
-
+Variants are identified using **GATK HaplotypeCaller** with a haploid configuration appropriate for MTB. Variants are filtered based on sequencing quality and depth.
 Current filtering criteria:
 
 ```text
@@ -123,22 +104,14 @@ DP   ≥ 10
 ```
 
 ### 7. Variant Quality Control
-
 Variant and sample-level QC metrics include:
-
 * SNP/variant counts
 * Allele frequency
 * Sequencing depth
-
 These metrics are used to assess variant quality and consistency across isolates.
 
 ### 8. Drug-Resistance Profiling
-
 **TB-Profiler** is used to identify mutations associated with MTB drug resistance.
-
-The VCF contains variants detected relative to the H37Rv reference genome, while TB-Profiler interprets variants using a curated MTB drug-resistance knowledge base.
-
-Therefore, the **total number of SNPs in the VCF is not equivalent to the number of drug-resistance-associated mutations** reported by TB-Profiler.
 
 ### 9. Visualization
 
@@ -183,7 +156,7 @@ mtb-spitseq-isolate-comparison/
 │   └── icmr/
 │
 ├── data/
-│
+│    └── (users should download their data in this folder for analysis)
 └── Plots/
     ├── Fig1_SNPs_per_Isolate.R
     ├── Fig2_Mutation_Categories.R
@@ -285,15 +258,12 @@ The pipeline generates:
 ## Variant Interpretation
 
 Variant calls represent differences between each isolate and the H37Rv reference genome.
-
 A detected SNP **does not necessarily indicate drug resistance**.
-
 Resistance-associated mutations are identified through downstream annotation and TB-Profiler.
 
 ### Fixed vs. Mixed Variants
 
 Allele frequency is considered when evaluating variants.
-
 * **Fixed variants:** the alternate allele is supported by approximately all reads at the position.
 * **Mixed variants:** both reference and alternate alleles are detected at appreciable frequencies.
 
@@ -382,5 +352,3 @@ The repository is intended to contain:
 **Gauri Agrawal**
 
 MS Bioinformatics, Johns Hopkins University
-
-[GitHub](https://github.com/Gauri1399)
