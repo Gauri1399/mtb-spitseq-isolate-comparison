@@ -208,13 +208,13 @@ conda activate mtb-pipeline
 ### Run locally
 
 ```bash
-nextflow run main.nf
+nextflow run main.nf -c config/paths.config 
 ```
 
 ### Run on HPC
 
 ```bash
-nextflow run main.nf -c config/hpc.config
+nextflow run main.nf -c config/paths.config -c config/hpc.config
 ```
 
 ---
